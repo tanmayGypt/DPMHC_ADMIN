@@ -14,7 +14,7 @@ export default function Login() {
 
         loginUser({ email, password })
             .then(response => {
-                Cookies.set("jwt", response.data);
+                Cookies.set("jwt", response);
                 navigate("/")
                 console.log("Login successful:", response);
             })
