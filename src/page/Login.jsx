@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from "../../api";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie"
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +14,7 @@ export default function Login() {
 
         loginUser({ email, password })
             .then(response => {
+                Cookies.set("jwt", response.data);
                 navigate("/")
                 console.log("Login successful:", response);
             })

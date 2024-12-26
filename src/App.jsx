@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Appointments from './page/Appointment';
 import Blogs from './page/Blogs';
 import Users from './page/Users';
@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path='/login' element={
-            <ProtectedRoute><Login /></ProtectedRoute>
+            <Login />
           } />
           <Route path="/appointment" element={<ProtectedRoute>
             <Appointments />
