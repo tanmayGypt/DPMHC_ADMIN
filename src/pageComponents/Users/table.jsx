@@ -16,7 +16,7 @@ export default function UsersTable({ data }) {
                 },
             },
             {
-                accessorKey: "email", // Accessor for Email
+                accessorKey: "username", // Accessor for Email
                 header: "Email",
                 enableSorting: true,
                 Cell: ({ cell }) => {

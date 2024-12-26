@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { loginUser } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -13,6 +14,7 @@ export default function Login() {
 
         loginUser({ email, password })
             .then(response => {
+                navigate("/")
                 console.log("Login successful:", response);
             })
             .catch(error => {

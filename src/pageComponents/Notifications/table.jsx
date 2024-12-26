@@ -9,6 +9,14 @@ export default function NotificationsTable({ data }) {
         const date = new Date(timestamp);
         return `${date.toLocaleDateString()}`; // Combine date and time
     };
+
+    const navigate = useNavigate();
+
+    // Handlers for Update action
+    const handleUpdate = (row) => {
+        navigate(`/addNotification/${row.id}`);
+    };
+
     const columns = useMemo(
         () => [
             {
@@ -53,6 +61,13 @@ export default function NotificationsTable({ data }) {
                 enableSorting: true,
             },
             {
+                accessorKey: "active", // Accessor for Active Status
+                header: "Active Status",
+                Cell: ({ renderedCellValue }) =>
+                    renderedCellValue !== undefined && renderedCellValue !== null ? (renderedCellValue ? "Yes" : "No") : "Not Applicable",
+                enableSorting: true,
+            },
+            {
                 accessorKey: "Action", // New Action column
                 header: "Action",
                 Cell: ({ row }) => (
@@ -68,7 +83,7 @@ export default function NotificationsTable({ data }) {
                 ),
             },
         ],
-        []
+        [navigate]
     );
 
     // Initialize the table with data and columns
@@ -80,13 +95,12 @@ export default function NotificationsTable({ data }) {
         initialState: {
             pagination: { pageIndex: 0, pageSize: 5 },
         },
+        muiTableBodyRowProps: ({ row }) => ({
+            sx: {
+                backgroundColor: row.original.active ? "rgba(255, 0, 0, 0.1)" : "white", // Apply reddish background if active
+            },
+        }),
     });
-    const navigate = useNavigate();
-    // Handlers for Update and Delete actions
-    const handleUpdate = (row) => {
-        navigate(`/addNotification/${row.id}`)
-        // Add your update logic here
-    };
 
     return (
         <Paper sx={{ padding: 2 }}>

@@ -124,7 +124,7 @@ export const registerUser = async (userData, otp) => {
 
 export const loginUser = async (loginData) => {
   try {
-    const response = await api.post('/auth/login', loginData);
+    const response = await api.post('/auth/login', { username: loginData.email, password: loginData.password });
 
     if (response.data !== "" && response.data !== "fail") Cookies.set("jwt", response.data);
     return response.data;
