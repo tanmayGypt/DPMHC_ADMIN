@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import { Analytics } from "@vercel/analytics/react"
+
 import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Appointments from './page/Appointment';
 import Blogs from './page/Blogs';
@@ -23,6 +25,7 @@ function App() {
     <>
       <Router>
 
+        <Analytics />
         <Routes>
           <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path='/login' element={
