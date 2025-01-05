@@ -16,6 +16,7 @@ const UNBLOCKED_ROUTES = [
   '/auth/getOtp',
   '/auth/verifyOtp',
   '/auth/resetPassword',
+  '/api/upload/images'
 ];
 
 api.interceptors.request.use((config) => {
@@ -29,6 +30,7 @@ api.interceptors.request.use((config) => {
 }, (error) => {
   return Promise.reject(error);
 });
+
 export const getCategoties = async () => {
   try {
     const response = await api.get('/category');

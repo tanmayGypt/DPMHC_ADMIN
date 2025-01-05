@@ -41,25 +41,37 @@ export default function Home() {
                         <Card
                             title="Last Signup"
                             dataPoint="Last Signup"
-                            dataValue={data?.lastSignup || "N/A"}
+                            dataValue={
+                                data?.lastSignup
+                                    ? new Date(data.lastSignup).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
                     <h2 className={sectionStyles}>Appointment Statistics</h2>
                     <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
                         <Card
                             title="Total Appointments"
                             dataPoint="Total Appointments"
-                            dataValue={data?.totalAppointments || 0}
+                            dataValue={data?.totalAppointment || 0}
                         />
                         <Card
                             title="Attended Appointments"
                             dataPoint="Attended Appointments"
-                            dataValue={data?.attendedAppointments || 0}
+                            dataValue={data?.attendedAppointment || 0}
                         />
                         <Card
                             title="Completed Appointments"
                             dataPoint="Completed Appointments"
-                            dataValue={data?.completedAppointments || 0}
+                            dataValue={data?.completedAppointment || 0}
                         />
                         <Card
                             title="Pending Appointments"
@@ -69,8 +81,20 @@ export default function Home() {
                         <Card
                             title="Last Added Appointment"
                             dataPoint="Last Added Appointment"
-                            dataValue={data?.lastAddedAppointment || "N/A"}
+                            dataValue={
+                                data?.lastAddedAppointment
+                                    ? new Date(data.lastAddedAppointment).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
 
                     <h2 className={sectionStyles}>Notifications</h2>
@@ -98,8 +122,20 @@ export default function Home() {
                         <Card
                             title="Last Added Notification"
                             dataPoint="Last Added Notification"
-                            dataValue={data?.lastAddedNotification || "N/A"}
+                            dataValue={
+                                data?.lastAddedNotification
+                                    ? new Date(data.lastAddedNotification).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
 
                     {/* Appointment Section */}
@@ -125,8 +161,20 @@ export default function Home() {
                         <Card
                             title="Last Added Blog"
                             dataPoint="Last Added Blog"
-                            dataValue={data?.lastAddedBlog || "N/A"}
+                            dataValue={
+                                data?.lastAddedBlog
+                                    ? new Date(data.lastAddedBlog).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
 
                     {/* Medicine Section */}
@@ -150,8 +198,20 @@ export default function Home() {
                         <Card
                             title="Last Added Medicine"
                             dataPoint="Last Added Medicine"
-                            dataValue={data?.lastAddedMedicine || "N/A"}
+                            dataValue={
+                                data?.lastAddedMedicine
+                                    ? new Date(data.lastAddedMedicine).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
 
                     {/* Users Section */}
@@ -182,8 +242,20 @@ export default function Home() {
                         <Card
                             title="Last Added Category"
                             dataPoint="Active Notifications"
-                            dataValue={data?.lastAddedCategory || "N/A"}
+                            dataValue={
+                                data?.lastAddedCategory
+                                    ? new Date(data.lastAddedCategory).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : "N/A"
+                            }
                         />
+
                     </div>
                     <h2 className={sectionStyles}>Comment Statistics</h2>
                     <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
@@ -195,8 +267,20 @@ export default function Home() {
                         <Card
                             title="Last Comment"
                             dataPoint="Blog Categories"
-                            dataValue={data?.lastComment || 0}
+                            dataValue={
+                                data?.lastComment
+                                    ? new Date(data.lastComment).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : 0
+                            }
                         />
+
                     </div>
 
                     <h2 className={sectionStyles}>Feedback Statistics</h2>
@@ -219,8 +303,20 @@ export default function Home() {
                         <Card
                             title="Last Feedback"
                             dataPoint="Blog Categories"
-                            dataValue={data?.lastFeedback || 0}
+                            dataValue={
+                                data?.lastFeedback
+                                    ? new Date(data.lastFeedback).toLocaleString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                    : 0
+                            }
                         />
+
                     </div>
 
                     <h2 className={sectionStyles}>Website Gallary Statistics</h2>

@@ -3,8 +3,6 @@ import { MaterialReactTable, useMaterialReactTable } from "material-react-table"
 import { Button, Paper } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-
-
 export default function AppointmentTable({ data }) {
     // Define columns for the table
     const columns = useMemo(
@@ -14,8 +12,7 @@ export default function AppointmentTable({ data }) {
                 header: "Name",
                 enableSorting: true,
                 Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
+                    return cell.getValue() || "Not Available";  // Handle null values
                 },
             },
             {
@@ -23,15 +20,14 @@ export default function AppointmentTable({ data }) {
                 header: "Phone",
                 enableSorting: true,
                 Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
+                    return cell.getValue() || "Not Available";  // Handle null values
                 },
             },
             {
                 accessorKey: "emailAddress", // Accessor for Email Address
                 header: "Email Address",
                 Cell: ({ renderedCellValue }) => (
-                    <Link to={`mailto:${renderedCellValue}`}>{renderedCellValue}</Link>
+                    <Link to={`mailto:${renderedCellValue}`}>{renderedCellValue || "Not Available"}</Link>
                 ),
                 enableSorting: true,
             },
@@ -40,8 +36,7 @@ export default function AppointmentTable({ data }) {
                 header: "Date",
                 enableSorting: true,
                 Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
+                    return cell.getValue() || "Not Available";  // Handle null values
                 },
             },
             {
@@ -49,8 +44,7 @@ export default function AppointmentTable({ data }) {
                 header: "Time",
                 enableSorting: true,
                 Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
+                    return cell.getValue() || "Not Available";  // Handle null values
                 },
             },
             {
@@ -59,69 +53,55 @@ export default function AppointmentTable({ data }) {
                 muiTableBodyCellProps: { sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } },
                 enableSorting: true,
                 Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
+                    return cell.getValue() || "Not Available";  // Handle null values
                 },
             },
             {
-                accessorKey: "dateCreated", // Accessor for Message
+                accessorKey: "dateCreated", // Accessor for Created Date
                 header: "Created Date",
                 muiTableBodyCellProps: { sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } },
                 enableSorting: true,
                 Cell: ({ cell }) => {
                     const date = new Date(cell.getValue());
-                    return date.toLocaleString() // Format timestamp to readable date
+                    return !isNaN(date.getTime()) ? date.toLocaleString() : "Not Available"; // Format timestamp to readable date
                 },
             },
             {
-                accessorKey: "dateModified", // Accessor for Message
+                accessorKey: "dateModified", // Accessor for Modified Date
                 header: "Modified Date",
                 muiTableBodyCellProps: { sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } },
                 enableSorting: true,
                 Cell: ({ cell }) => {
                     const date = new Date(cell.getValue());
-                    return date.toLocaleString(); // Format timestamp to readable date
+                    return !isNaN(date.getTime()) ? date.toLocaleString() : "Not Available"; // Format timestamp to readable date
                 },
             },
-
-
             {
                 accessorKey: "documentUrl", // Accessor for Document URL
                 header: "Document",
                 Cell: ({ renderedCellValue }) => {
-                    const url = renderedCellValue?.startsWith("http")
-                        ? renderedCellValue
-                        : `https://${renderedCellValue}`;
-                    return (
+                    const url = renderedCellValue?.startsWith("http") ? renderedCellValue : `https://${renderedCellValue}`;
+                    return renderedCellValue ? (
                         <a href={url} target="_blank" rel="noopener noreferrer">
                             View Document
                         </a>
-                    );
+                    ) : "Not Available";
                 },
                 enableSorting: true,
             },
             {
-                accessorKey: "status", // Accessor for Document URL
+                accessorKey: "status", // Accessor for Client Status
                 header: "Client Status",
                 Cell: ({ renderedCellValue }) => {
-                    return renderedCellValue ? renderedCellValue : "Not Available"
+                    return renderedCellValue || "Not Available"; // Handle null values
                 },
                 enableSorting: true,
             },
             {
-                accessorKey: "attended", // Accessor for Document URL
+                accessorKey: "attended", // Accessor for Attend Status
                 header: "Attend Status",
                 Cell: ({ renderedCellValue }) => {
-                    return renderedCellValue ? "Attended" : "Not Attended"
-                },
-                enableSorting: true,
-            },
-            {
-                accessorKey: "attendedDate", // Accessor for Document URL
-                header: "Attend Status",
-                Cell: ({ renderedCellValue }) => {
-                    const date = new Date(renderedCellValue);
-                    return date.toLocaleString();
+                    return renderedCellValue === null ? "Not Available" : renderedCellValue ? "Attended" : "Not Attended";
                 },
                 enableSorting: true,
             },
@@ -153,13 +133,13 @@ export default function AppointmentTable({ data }) {
             pagination: { pageIndex: 0, pageSize: 5 },
         },
     });
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+
     // Handlers for Update and Delete actions
     const handleUpdate = (row) => {
-
-        navigate(`/appointment/${row.id}`)
+        navigate(`/appointment/${row.id}`);
     };
-
 
     return (
         <Paper sx={{ padding: 2 }}>
