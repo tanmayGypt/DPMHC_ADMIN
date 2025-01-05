@@ -5,13 +5,13 @@ import { getStatistics } from "../../api";
 
 export default function Home() {
     const [data, setData] = useState({});
-    // useEffect(() => {
-    //     const fetch = async () => {
-    //         const resp = await getStatistics();
-    //         if (resp) setData(resp);
-    //     }
-    //     fetch();
-    // }, [])
+    useEffect(() => {
+        const fetch = async () => {
+            const resp = await getStatistics();
+            if (resp) setData(resp);
+        }
+        fetch();
+    }, [])
     const sectionStyles =
         "text-2xl font-semibold mb-4 transition-colors hover:text-blue-500 my-4 mt-10";
     return (
