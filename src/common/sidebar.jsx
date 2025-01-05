@@ -52,7 +52,7 @@ const Sidebar = () => {
                             { to: "/Comments", label: "Comments", icon: FaComments },
                             { to: "/Feedback", label: "Feedback", icon: FaClipboardList },
                             { to: "/medicines", label: "Medicine", icon: FaMedkit },
-                            { to: "/appointment", label: "Appointments", icon: FaClipboardList },
+                            { to: "/Appointment", label: "Appointments", icon: FaClipboardList },
                             { to: "/blogs", label: "Blogs", icon: FaBlog },
                             { to: "/Categories", label: "Categories", icon: FaTags },
                             { to: "/notifications", label: "Notifications", icon: FaBell },
@@ -62,8 +62,8 @@ const Sidebar = () => {
                                 <Link
                                     to={to}
                                     className={`flex items-center p-2 rounded-lg ${isActive(to)
-                                            ? "bg-indigo-600 text-white"
-                                            : "text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                                        ? "bg-indigo-600 text-white"
+                                        : "text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                                         }`}
                                 >
                                     <Icon className="w-5 h-5" />

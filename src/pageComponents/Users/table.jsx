@@ -78,7 +78,7 @@ export default function UsersTable({ data }) {
                 accessorKey: "createdDate", // Accessor for Created Date
                 header: "Created Date",
                 Cell: ({ renderedCellValue }) =>
-                    new Date(renderedCellValue).toLocaleDateString(), // Format the date
+                    new Date(renderedCellValue).toLocaleString(), // Format the date
                 enableSorting: true,
             },
 

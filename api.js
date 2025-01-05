@@ -16,7 +16,8 @@ const UNBLOCKED_ROUTES = [
   '/auth/getOtp',
   '/auth/verifyOtp',
   '/auth/resetPassword',
-  '/api/upload/images'
+  '/api/upload/images',
+
 ];
 
 api.interceptors.request.use((config) => {

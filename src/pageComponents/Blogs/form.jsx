@@ -64,7 +64,7 @@ const BlogsForm = () => {
             title: data?.title || '',
             description: data?.description || '',
             author: data?.author || '',
-            modelCategory: data?.modelCategory || 0,
+            modelCategoty: data?.modelCategoty || 0,
             category: data?.category || '',
             images: data?.images || [''],
             body: data?.body || '',
@@ -75,7 +75,7 @@ const BlogsForm = () => {
             title: Yup.string().required('Title is required'),
             description: Yup.string().required('Description is required'),
             author: Yup.string().required('Author is required'),
-            modelCategory: Yup.number()
+            modelCategoty: Yup.number()
                 .oneOf([0, 1], 'Model Category must be 0 (Blog) or 1 (Medicine)')
                 .required('Model Category is required'),
             category: Yup.string().default(data?.category),
@@ -189,19 +189,19 @@ const BlogsForm = () => {
 
                 {/* Model Category */}
                 <div>
-                    <label htmlFor="modelCategory" className="block text-sm font-medium text-gray-700">Model Category</label>
+                    <label htmlFor="modelCategoty" className="block text-sm font-medium text-gray-700">Model Category</label>
                     <select
-                        name="modelCategory"
-                        id="modelCategory"
-                        {...formik.getFieldProps('modelCategory')}
+                        name="modelCategoty"
+                        id="modelCategoty"
+                        {...formik.getFieldProps('modelCategoty')}
                         className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     >
                         <option value={0}>Blog</option>
                         <option value={1}>Medicine</option>
                         <option value={1}>Others</option>
                     </select>
-                    {formik.touched.modelCategory && formik.errors.modelCategory && (
-                        <div className="text-sm text-red-500 mt-1">{formik.errors.modelCategory}</div>
+                    {formik.touched.modelCategoty && formik.errors.modelCategoty && (
+                        <div className="text-sm text-red-500 mt-1">{formik.errors.modelCategoty}</div>
                     )}
                 </div>
 

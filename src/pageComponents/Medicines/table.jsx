@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 export default function MedicineTable({ data }) {
     const navigate = useNavigate();
 
+    // Filter out medicines with modelCategoty === 0
+    const filteredData = data?.filter((item) => item.modelCategoty !== 0) || [];
+
     const formatDateTime = (timestamp) => {
         if (!timestamp) return "N/A";
         const date = new Date(timestamp);
@@ -22,17 +25,17 @@ export default function MedicineTable({ data }) {
                 header: "Title",
                 enableSorting: true,
                 Cell: ({ row }) => {
-                    // Access the specific cell value for 'category'
                     return row.original.title || "Not Available";
                 },
             },
             {
                 accessorKey: "description", // Accessor for Description
                 header: "Description",
-                muiTableBodyCellProps: { sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } },
+                muiTableBodyCellProps: {
+                    sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+                },
                 enableSorting: true,
                 Cell: ({ row }) => {
-                    // Access the specific cell value for 'category'
                     return row.original.description || "Not Available";
                 },
             },
@@ -41,7 +44,6 @@ export default function MedicineTable({ data }) {
                 header: "Author",
                 enableSorting: true,
                 Cell: ({ row }) => {
-                    // Access the specific cell value for 'category'
                     return row.original.author || "Not Available";
                 },
             },
@@ -50,8 +52,7 @@ export default function MedicineTable({ data }) {
                 header: "Category",
                 enableSorting: true,
                 Cell: ({ row }) => {
-                    // Access the specific cell value for 'category'
-                    return row.original.author || "Not Available";
+                    return row.original.category || "Not Available";
                 },
             },
             {
@@ -64,7 +65,7 @@ export default function MedicineTable({ data }) {
                 enableSorting: true,
             },
             {
-                accessorKey: "modifiedDate", // Accessor for Created Time
+                accessorKey: "modifiedDate", // Accessor for Modified Date
                 header: "Modified Date",
                 Cell: ({ row }) => {
                     const formatted = formatDateTime(row.original.modifiedDate);
@@ -92,7 +93,7 @@ export default function MedicineTable({ data }) {
     );
 
     const table = useMaterialReactTable({
-        data,
+        data: filteredData, // Use filtered data here
         columns,
         enableSorting: true,
         enablePagination: true,
@@ -100,11 +101,10 @@ export default function MedicineTable({ data }) {
             pagination: { pageIndex: 0, pageSize: 5 },
         },
     });
+
     const handleUpdate = (row) => {
-        navigate(`/addBlog/${row.id}`)
+        navigate(`/addBlog/${row.id}`);
     };
-
-
 
     return (
         <Paper sx={{ padding: 2 }}>

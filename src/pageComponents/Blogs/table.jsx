@@ -3,72 +3,61 @@ import { MaterialReactTable, useMaterialReactTable } from "material-react-table"
 import { Button, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-
 export default function BlogsTable({ data }) {
+    // Filter out rows with modelCategoty === 1
+    const filteredData = useMemo(() => {
+        return data.filter((row) => row.modelCategoty !== 1);
+    }, [data]);
+
     const columns = useMemo(
         () => [
             {
                 accessorKey: "title", // Accessor for Title
                 header: "Title",
                 enableSorting: true,
-                Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
-                },
+                Cell: ({ cell }) => cell.getValue() || "Not Available", // Handle empty values
             },
             {
                 accessorKey: "description", // Accessor for Description
                 header: "Description",
                 muiTableBodyCellProps: { sx: { maxWidth: "300px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } },
                 enableSorting: true,
-                Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
-                },
+                Cell: ({ cell }) => cell.getValue() || "Not Available", // Handle empty values
             },
             {
                 accessorKey: "author", // Accessor for Author
                 header: "Author",
                 enableSorting: true,
             },
-
             {
                 accessorKey: "category", // Accessor for Category
                 header: "Category",
                 enableSorting: true,
-                Cell: ({ cell }) => {
-
-                    return cell.getValue() || "Not Available";  // Format timestamp to readable date
-                },
+                Cell: ({ cell }) => cell.getValue() || "Not Available", // Handle empty values
             },
-
-
             {
                 accessorKey: "createdDate", // Accessor for Created Date
                 header: "Created Date",
                 enableSorting: true,
                 Cell: ({ cell }) => {
                     const date = new Date(cell.getValue());
-                    return date.toLocaleDateString() || "Not Available";  // Format timestamp to readable date
+                    return date.toLocaleString() || "Not Available"; // Format timestamp
                 },
             },
             {
-                accessorKey: "modifiedDate", // Accessor for Created Time
+                accessorKey: "modifiedDate", // Accessor for Modified Date
                 header: "Modified Date",
                 enableSorting: true,
                 Cell: ({ cell }) => {
                     const date = new Date(cell.getValue());
-                    return date.toLocaleDateString() || "Not Available";  // Format timestamp to readable date
+                    return date.toLocaleString() || "Not Available"; // Format timestamp
                 },
             },
             {
-                accessorKey: "published", // Accessor for Created Time
+                accessorKey: "published", // Accessor for Publish Status
                 header: "Publish Status",
                 enableSorting: true,
-                Cell: ({ cell }) => {
-
-                    return cell.getValue() ? "Published" : "Not Published"  // Format timestamp to readable date
-                },
+                Cell: ({ cell }) => (cell.getValue() ? "Published" : "Not Published"), // Boolean to string
             },
             {
                 accessorKey: "Action", // New Action column
@@ -82,7 +71,6 @@ export default function BlogsTable({ data }) {
                         >
                             Update
                         </Button>
-
                     </div>
                 ),
             },
@@ -91,7 +79,7 @@ export default function BlogsTable({ data }) {
     );
 
     const table = useMaterialReactTable({
-        data,
+        data: filteredData, // Use filtered data
         columns,
         enableSorting: true,
         enablePagination: true,
@@ -99,12 +87,11 @@ export default function BlogsTable({ data }) {
             pagination: { pageIndex: 0, pageSize: 5 },
         },
     });
+
     const navigate = useNavigate();
     const handleUpdate = (row) => {
-        navigate(`/addBlog/${row.id}`)
+        navigate(`/addBlog/${row.id}`);
     };
-
-
 
     return (
         <Paper sx={{ padding: 2 }}>
